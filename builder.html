@@ -3,111 +3,28 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="builder.css">
     <title>yankee | html builder</title>
 </head>
 
 <body>
-    <style>
-body
-{
-    margin: 0;
-}
-main 
-{
-    display: flex;
-    position: fixed;
-    height: 100%;
-width:100% ;
-}
-#config-section,#ui-section
-{
-width: 450px;
-
- height: 100%;
- overflow-y: auto;
- overflow-x: hidden;
- background:#fbfbfb;
- box-shadow:1px 0px 10px 0Px #ddd;
- 
-}
-
-#ui-section
-{
-    box-shadow:-1px 0px 10px 0Px #ddd;
-}
-iframe
-{
-width: 100%;
-
-
-}
-
-.yankee
-{
-font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-user-select: none;
-}
-
-.adder
-{
-    height:4px ;
-    margin: 2px 0px;
-    transition:0.1S linear height;
-}
-
-.adder.child
-{
-margin-left: 14px;
-}
-
-.adder:hover
-{
-
-height: 10px;
-border: 3px solid rgb(29, 190, 11);
-box-shadow:-1px 0px 5px 0Px rgb(24, 214, 3);
-border-radius: 5px;
-
-}
-
-.adder.child:hover
-{
-}
-
-.yankee-notebook a
-{
-padding: 10px 10px;
-color: black;
-
-}
-
-.yankee-notebook a:hover
-{
-background-color:rgb(29, 190, 11);
-color: rgb(255, 255, 255);
-
-}
-.yankee-notebook .header
-{
-padding: 10px 0;
-background: #f4F4F4;
-
-}
-
-.yankee a
-{
-    text-decoration: none;
-}
-</style>
 <main>
     <section id="config-section" class="yankee">
  
-            <div class="yankee-notebook">
+            <div class="notebook">
             <div class="header">
-                <a href="">style</a>
-                <a href="">config</a>
-                <a href=""></a>
+                <a href="#style" class="activate">style</a>
+                <a href="#config">config</a>
             </div>
+            <div class="tabs">
+            <div class="tab config" >
+
+            </div>
+            <div class="tab style">
+
+            </div>
+            </div>
+
             </div>
 
             

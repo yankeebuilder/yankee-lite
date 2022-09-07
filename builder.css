@@ -1,0 +1,116 @@
+body
+{
+    margin: 0;
+}
+main 
+{
+    display: flex;
+    position: fixed;
+    height: 100%;
+width:100% ;
+}
+#config-section,#ui-section
+{
+width: 450px;
+
+ height: 100%;
+ overflow-y: auto;
+ overflow-x: hidden;
+ background:#fbfbfb;
+ box-shadow:1px 0px 10px 0Px #ddd;
+ 
+}
+
+#ui-section
+{
+    box-shadow:-1px 0px 10px 0Px #ddd;
+    
+}
+
+#ui-view
+{
+    padding: 40px;
+}
+iframe
+{
+width: 100%;
+
+
+}
+
+.yankee
+{
+font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+user-select: none;
+}
+
+.yankee .adder
+{
+    height:4px ;
+    margin: 2px 0px;
+    transition:0.1S linear height;
+}
+
+.yankee .adder.child
+{
+margin-left: 14px;
+}
+
+.yankee .notebook .tabs
+{
+position: relative;
+}
+.yankee .notebook .tab
+{
+position: absolute;
+left:0;                                                                                                                                                                                                                                                                                    x: 0;
+top:0;
+}
+.yankee .adder:hover
+{
+
+height: 10px;
+border: 3px solid rgb(29, 190, 11);
+box-shadow:-1px 0px 5px 0Px rgb(24, 214, 3);
+border-radius: 5px;
+
+}
+
+.yankee .adder.child:hover
+{
+    border: 3px solid rgb(190, 11, 11);
+box-shadow:-1px 0px 5px 0Px rgb(214, 56, 3);
+}
+
+.yankee .notebook a
+{
+padding: 10px 10px;
+color: black;
+
+}
+
+.yankee .notebook a:hover
+{
+background-color:rgb(230, 230, 230);
+
+
+}
+
+.yankee .notebook a.activate
+{
+background-color:rgb(9, 109, 215);
+color: rgb(255, 255, 255);
+
+}
+.yankee .notebook .header
+{
+
+background: #f4F4F4;
+display: flex;
+
+}
+
+.yankee a
+{
+    text-decoration: none;
+}
