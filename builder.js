@@ -9,11 +9,10 @@ data= `
 </head>
 <body>
 <style>
-*{background:red}
+
 </style>
   <h1>welcome to yankee the greatest html5 editor in the world</h1>  
   <h2>contribute to the project on <a href="https://github.com/ngdream/yankee">github</a></h2>
-  <div style="height:100%">sdsds</div>
 </body>
 </html>
 `
@@ -52,7 +51,9 @@ class Element
            var  addedelement = document.createElement("div")
             var c = document.createTextNode("carte")
             addedelement.append(c)
-            new Element(this.viewelement.appendChild(addedelement))
+            this.viewelement.insertBefore(addedelement, this.viewelement.firstChild);
+            var newelement = new Element(addedelement)
+            this.uielement.querySelector(".childs").insertBefore(newelement.uielement, this.uielement.querySelector(".childs").firstChild);
         }
 
         
@@ -61,7 +62,9 @@ class Element
             var c = document.createTextNode("carte")
             addedelement.append(c)
             this.viewelement.after(addedelement)
-            new Element(addedelement)
+            var newelement = new Element(addedelement)
+            this.uielement.after(newelement.uielement)
+            console.log(c.uielement)
         }
         this.uielement.querySelector(".adder").addEventListener("mouseover",extendadder.bind(this))
         this.uielement.querySelector(".adder").addEventListener("mouseout", resetadder.bind(this))
@@ -72,16 +75,14 @@ class Element
             e.stopPropagation();
             var rangeObj = document.createRange();
             rangeObj.selectNode(this.viewelement)
-            console.log(this.viewelement)
         document.getSelection().addRange(rangeObj)
-            //this.viewelement.setAttribute("style","background-color:#eef")
+            this.viewelement.setAttribute("style","background-color:#eef")
          
         };
         
         var outfunction = function (e) {
             e.stopPropagation();
-           
-            console.log(this.viewelement)
+
             this.viewelement.setAttribute("style","background-color:none")
          
         };
@@ -92,11 +93,10 @@ class Element
         for (let e = 0;e<Element.elements.length;e++)
             if (Element.elements[e].viewelement == this.viewelement.parentElement)
             {
-                console.log(this.viewelement)
                 this.parent = Element.elements[e]
-                console.log("je suis la")
                 this.depth = this.parent.depth + 1
-                childs=this.parent.uielement.querySelector(".childs")
+                childs = this.parent.uielement.querySelector(".childs")
+                break;
                 }
         console.log(this.depth)
         childs.append(this.uielement)
@@ -118,8 +118,8 @@ console.log(iframe.contentWindow.document.readyState)
     if (  iframe.contentWindow.document.readyState  === "complete" ) {
         //iframe.contentWindow.alert("Hello")
     
-        iframe.contentWindow.onload = function(){
-            alert("I am loaded")
+        iframe.contentWindow.onload = function () {
+            
         };
       
         dataelements=iframe.contentWindow.document.querySelectorAll("*")
