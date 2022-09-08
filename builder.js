@@ -9,13 +9,48 @@ data= `
 </head>
 <body>
 <style>
+*
+{
+    text-align:center;
+    font-family:helvetica;
+    color:#555;
+}
+a
+{
+    text-decoration:none;
+    color:black;
+    border-bottom: 2px black dashed
+    
+}
 
+a:hover
+{
+color:rgb(224, 0, 104);
+border-color:rgb(224, 0, 104);
+}
 </style>
-  <h1>welcome to yankee the greatest html5 editor in the world</h1>  
+  <h1>welcome a new open source html5 editor in the world</h1>  
   <h2>contribute to the project on <a href="https://github.com/ngdream/yankee">github</a></h2>
 </body>
 </html>
 `
+
+var yankeenotebook = document.querySelector(".yankee .notebook")
+var tabsbutton = yankeenotebook.querySelectorAll(".header button")
+for (let i = 0; i < tabsbutton.length; i++)
+{
+    tabsbutton[i].addEventListener("click", (e) => {
+        tab = yankeenotebook.querySelector(".tabs .active");
+        tab.className=tab.className.replace(" active","")
+        yankeenotebook.querySelector(".header .active").className=""
+        e.target.className+=" active"
+        tab = yankeenotebook.querySelector("." + e.target.getAttribute("target")); 
+        console.log("." + e.target.getAttribute("target"))
+        tab.className += " active";
+    }
+    )
+
+    }
 //class for elements
 class Element
 { 
@@ -81,6 +116,8 @@ class Element
         this.uielement.style = "position:relative;" 
         this.uielement.style.left=this.depth * 13 + "px"
         Element.elements.push(this)
+        this.viewelementcontent = document.createTextNode("")
+        this.viewelement.insertBefore(this.viewelementcontent,this.viewelement.firstChild)
     }
 
     cancontaintext() {
@@ -94,17 +131,15 @@ class Element
     addchild(tag)
     {
         var  addedelement = document.createElement(tag)
-        var c = document.createTextNode("carte")
-        addedelement.append(c)
         this.viewelement.insertBefore(addedelement, this.viewelement.firstChild);
         var newelement = new Element(addedelement)
         this.uielement.querySelector(".childs").insertBefore(newelement.uielement, this.uielement.querySelector(".childs").firstChild);
+        this.uielement.querySelector(".childs").insertBefore(newelement.viewelementcontent, this.uielement.querySelector(".childs").firstChild);
     }
     addafter(tag)
     {
         var  addedelement = document.createElement(tag)
-        var c = document.createTextNode("carte")
-        addedelement.append(c)
+  
         this.viewelement.after(addedelement)
         var newelement = new Element(addedelement)
         this.uielement.after(newelement.uielement)
@@ -116,14 +151,36 @@ class Element
     {
      
         var styleoption = `
-        <div>
-        <span>
+        <div class="position option list">
+        <h3>
         position
-        </span>
-        </div>
-        <div>
+        </h3>
+        <div class="custom-select" style="width:200px;">
+        <select>
+          <option value="0">Static</option>
+          <option value="1">Fixed</option>
+          <option value="2">absolute</option>
+          <option value="3">relative</option>
+        </select>
+      </div>
         </div>
         `;
+
+        styleoption +=`
+        <div class="position option list">
+        <h3>
+        box sizing
+        </h3>
+        <div class="custom-select" style="width:200px;">
+        <select>
+          <option value="0">border-box</option>
+          <option value="1">content-box</option>
+        </select>
+      </div>
+        </div>
+        `
+
+        document.querySelector(".yankee .style").innerHTML=styleoption
 
         var configoption = `
         <div class="textcontent option">
@@ -142,16 +199,17 @@ class Element
         <input/>
         </div>
         `;
-
-        document.querySelector(".yankee .style").innerHTML=styleoption
-        document.querySelector(".yankee .config").innerHTML = configoption
+document.querySelector(".yankee .config").innerHTML = configoption
+    
+        
 
         var configstab = document.querySelector(".yankee .config")
 
-        var changetextcontent = (e) => { e.stopPropagation(); this.viewelement.innerHTML = e.target.value }
-        
+        var changetextcontent = (e) => { e.stopPropagation(); this.viewelementcontent.nodeValue = e.target.value }
+        var changehref = (e) => { e.stopPropagation(); this.viewelement.href=e.target.value }
+
         configstab.querySelector(".textcontent").querySelector("textarea").addEventListener("input",changetextcontent.bind(this))
-        
+        configstab.querySelector(".href").querySelector("input").addEventListener("input",changehref.bind(this))
         
     }
 

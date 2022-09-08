@@ -44,6 +44,7 @@ width: 100%;
 .yankee
 {
 font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+-webkit-user-select: none;
 user-select: none;
 }
 
@@ -94,21 +95,22 @@ border-radius: 5px;
 box-shadow:-1px 0px 5px 0Px rgb(214, 56, 3);
 }
 
-.yankee .notebook a
+.yankee .notebook button
 {
 padding: 10px 10px;
 color: black;
+border: none;
 
 }
 
-.yankee .notebook a:hover
+.yankee .notebook button:hover
 {
 background-color:rgb(230, 230, 230);
 
 
 }
 
-.yankee .notebook a.active
+.yankee .notebook button.active
 {
 border-bottom: 2px solid rgb(224, 0, 104);
 
