@@ -7,17 +7,20 @@
     <title>yankee | html builder</title>
 </head>
 
-<body>
+<body id="yankee-body">
+    
 <main>
-    <section id="config-section" class="yankee">
- 
+    <section id="yankee-config-section" class="yankee">
+        <div class="section-header">
+          options
+        </div>
             <div class="notebook">
             <div class="header">
-                <a href="#style" class="activate">style</a>
-                <a href="#config">config</a>
+                <a href="#style" >style</a>
+                <a href="#config" class="active">config</a>
             </div>
             <div class="tabs">
-            <div class="tab config" >
+            <div class="tab config active" >
 
             </div>
             <div class="tab style">
@@ -27,26 +30,19 @@
 
             </div>
 
-            
-
 
     </section>
     <iframe  frameborder="0" height="100%"></iframe>
     <section id="ui-section" class="yankee">
+    <div class="section-header">
+            DOM
+    </div>
     <div id="ui-view"></div>
     </section>
 </main>
 
-
-<div>
-    <div></div>
-</div>
-
+<script type="text/javascript">console.log("made by elodream (MIT LICENSE) yankee 0.0.1")</script>
 <script src="builder.js"></script>
-<script>
-
-
-</script>
 
 </body>
 </html>

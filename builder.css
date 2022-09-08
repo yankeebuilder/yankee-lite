@@ -1,30 +1,33 @@
-body
+#yankee-body
 {
     margin: 0;
 }
+ *.yankee ,.yankee *
+{
+    position: relative;
+    box-sizing: border-box;
+}
+
 main 
 {
-    display: flex;
-    position: fixed;
-    height: 100%;
+display: flex;
+position: fixed;
+height: 100%;
 width:100% ;
 }
-#config-section,#ui-section
+#yankee-config-section,#ui-section
 {
-width: 450px;
-
- height: 100%;
- overflow-y: auto;
- overflow-x: hidden;
- background:#fbfbfb;
- box-shadow:1px 0px 10px 0Px #ddd;
- 
+width: 475px;
+height: 100%;
+overflow-y: auto;
+overflow-x: hidden;
+background:#fbfbfb;
+box-shadow:1px 0px 10px 0Px #ddd;
 }
 
 #ui-section
 {
-    box-shadow:-1px 0px 10px 0Px #ddd;
-    
+    box-shadow:-1px 0px 15px 0Px #ddd;   
 }
 
 #ui-view
@@ -65,13 +68,22 @@ position: relative;
 position: absolute;
 left:0;                                                                                                                                                                                                                                                                                    x: 0;
 top:0;
+width: 100%;
+padding: 20px 20px 10px;
+box-sizing: border-box;
+display: none;
+}
+
+.yankee .notebook .tab.active
+{
+display: block;
 }
 .yankee .adder:hover
 {
 
 height: 10px;
-border: 3px solid rgb(29, 190, 11);
-box-shadow:-1px 0px 5px 0Px rgb(24, 214, 3);
+border: 3px solid  rgb(255, 65, 154);
+box-shadow:-1px 0px 5px 0Px  rgb(224, 0, 104);
 border-radius: 5px;
 
 }
@@ -96,10 +108,9 @@ background-color:rgb(230, 230, 230);
 
 }
 
-.yankee .notebook a.activate
+.yankee .notebook a.active
 {
-background-color:rgb(9, 109, 215);
-color: rgb(255, 255, 255);
+border-bottom: 2px solid rgb(224, 0, 104);
 
 }
 .yankee .notebook .header
@@ -113,4 +124,43 @@ display: flex;
 .yankee a
 {
     text-decoration: none;
+}
+
+
+.yankee .option
+{
+
+}
+
+.yankee .option h3
+{
+    width: 100%;
+}
+
+.yankee .section-header
+{
+    text-align: center;
+    width: 100%; 
+    background-color: rgb(224, 0, 104);
+    color: white;
+    padding:10px ;
+}
+
+.yankee .option textarea, .yankee .option input
+{
+    width: 100%;
+    resize: none;
+    border-radius: 10px;
+    border:1px solid #bbb;
+    background-color: #fafafa;
+}
+
+.yankee .option textarea
+{
+    height: 100px;
+}
+
+.yankee .option h3
+{
+margin-bottom:5px;
 }

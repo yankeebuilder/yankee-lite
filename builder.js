@@ -34,39 +34,16 @@ class Element
         <div class="childs">
         </div>
         <div class="adder next"></div>`;
-
-        
-        var extendadder = function (e) {
-           
+        var addchild = ()=> {
+            this .addchild("div")
         }
 
-        var resetadder = function (e) {
-      
+        var addafter = ()=> {
+            this .addafter("div")
         }
-        
-        var addchild = function (e) {
-           var  addedelement = document.createElement("div")
-            var c = document.createTextNode("carte")
-            addedelement.append(c)
-            this.viewelement.insertBefore(addedelement, this.viewelement.firstChild);
-            var newelement = new Element(addedelement)
-            this.uielement.querySelector(".childs").insertBefore(newelement.uielement, this.uielement.querySelector(".childs").firstChild);
-        }
-
-        var addnext = function (e) {
-            var  addedelement = document.createElement("div")
-            var c = document.createTextNode("carte")
-            addedelement.append(c)
-            this.viewelement.after(addedelement)
-            var newelement = new Element(addedelement)
-            this.uielement.after(newelement.uielement)
-            console.log(c.uielement)
-        }
-        this.uielement.querySelector(".adder").addEventListener("mouseover",extendadder.bind(this))
-        this.uielement.querySelector(".adder").addEventListener("mouseout", resetadder.bind(this))
 
         this.uielement.querySelector(".adder.child").addEventListener("click",addchild.bind(this))//add a child for this element
-        this.uielement.querySelector(".adder.next").addEventListener("click",addnext.bind(this))//add an element after this element
+        this.uielement.querySelector(".adder.next").addEventListener("click",addafter.bind(this))//add an element after this element
 
 
         var overfunction = function (e) {
@@ -81,8 +58,10 @@ class Element
          
         };
 
-        var initoption = () => {
+        var initoption = (e) => {
+            e.stopPropagation();
             this.createoption()
+            Element.selected=this
         }
         this.uielement.addEventListener("mouseover", overfunction.bind(this))
         this.uielement.addEventListener("mouseout", outfunction.bind(this))
@@ -112,6 +91,27 @@ class Element
         }
     }
 
+    addchild(tag)
+    {
+        var  addedelement = document.createElement(tag)
+        var c = document.createTextNode("carte")
+        addedelement.append(c)
+        this.viewelement.insertBefore(addedelement, this.viewelement.firstChild);
+        var newelement = new Element(addedelement)
+        this.uielement.querySelector(".childs").insertBefore(newelement.uielement, this.uielement.querySelector(".childs").firstChild);
+    }
+    addafter(tag)
+    {
+        var  addedelement = document.createElement(tag)
+        var c = document.createTextNode("carte")
+        addedelement.append(c)
+        this.viewelement.after(addedelement)
+        var newelement = new Element(addedelement)
+        this.uielement.after(newelement.uielement)
+        console.log(c.uielement)  
+    }
+    
+
     createoption()
     {
      
@@ -126,17 +126,33 @@ class Element
         `;
 
         var configoption = `
-        <div>
-        <span>
+        <div class="textcontent option">
+        <h3>
         content
-        </span>
-        <input type="textarea"/>
+        </h3>
+        <textarea></textarea>
+        </div>
+        `;
+
+        configoption+=`
+        <div class="href option">
+        <h3>
+        link
+        </h3>
+        <input/>
         </div>
         `;
 
         document.querySelector(".yankee .style").innerHTML=styleoption
-        document.querySelector(".yankee .config").innerHTML=configoption
+        document.querySelector(".yankee .config").innerHTML = configoption
 
+        var configstab = document.querySelector(".yankee .config")
+
+        var changetextcontent = (e) => { e.stopPropagation(); this.viewelement.innerHTML = e.target.value }
+        
+        configstab.querySelector(".textcontent").querySelector("textarea").addEventListener("input",changetextcontent.bind(this))
+        
+        
     }
 
 }
@@ -183,4 +199,5 @@ function main()
     checkIframeLoaded()
    
 }
+
 main()
