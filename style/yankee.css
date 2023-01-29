@@ -8,6 +8,11 @@
     --green-1:rgb(0, 179, 0);
 }
 
+canvas
+{
+    background-image: url("../assets/grid.png");
+}
+
 *
 {
     box-sizing: border-box;
@@ -122,7 +127,7 @@ header
   height: 48px; 
   background-color: var(--header-bg); 
   display: flex;
-  align-Items: center;
+  align-items: center;
   justify-content: space-between;
   
 
@@ -152,7 +157,7 @@ header
     text-align: center;
     color: aliceblue;
     margin: 0;
-    font-size: 1.2rem;
+    font-size: 0.9rem;
     font-weight: 500;
     letter-spacing: 0.2rem;
 }
@@ -190,7 +195,7 @@ background-color:#333
 }
 #donate-button:hover
 {
- background-color: rgb(0, 238, 247); 
+ background-color: rgb(255, 251, 0); 
  color: #000;  
 
 }

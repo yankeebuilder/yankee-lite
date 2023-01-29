@@ -4,11 +4,11 @@ var dialogs = document.querySelector(".dialog-wrapper")
 var toolbuttons = tools.querySelectorAll("button")
 var entity_dialog = `
 <div class=" dialog">
-<input type="text" placeholder="entity name" name="" id="">
+<input type="text" placeholder="entity name" name="" id="name">
 <div class="attributes"></div>
 <div class="addattributes">
-    <input type="text" placeholder="attribute name" name="" id=""> 
-    <button>add</button>
+    <input type="text" placeholder="attribute name" name="" id="addinput"> 
+    <button id="add">add</button>
 
 </div>
 </div>
@@ -69,11 +69,12 @@ document.querySelector("#photo").addEventListener("click", () =>
     let canvas =document.querySelector("canvas")
 
     let newcanvas = document.createElement("canvas")
-    newcanvas.width = 856
-    newcanvas.height = 700
+    newcanvas.width = 1200
+  newcanvas.height = 700
+  
     
     let ctx = newcanvas.getContext('2d');
-    ctx.scale(0.2, 0.2)
+  
     ctx.drawImage(canvas,0,0,newcanvas.width,newcanvas.height,0,0,newcanvas.width,newcanvas.height)
 
     let downloadlink = document.createElement("a")
