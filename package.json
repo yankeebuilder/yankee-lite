@@ -1,0 +1,24 @@
+{
+  "name": "my-electron-app",
+  "version": "1.0.0",
+  "description": "Hello World!",
+  "main": "main.js",
+  "author": "Jane Doe",
+  "scripts": {
+    "start": "electron ."
+  },
+  "dependencies": {
+    "electron": "^22.1.0",
+    "electron-builder": "^23.6.0"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yankeebuilder/yankee.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yankeebuilder/yankee/issues"
+  },
+  "homepage": "https://github.com/yankeebuilder/yankee#readme"
+}
