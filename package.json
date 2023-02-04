@@ -1,17 +1,31 @@
 {
-  "name": "my-electron-app",
+  "name": "yankee",
   "version": "1.0.0",
-  "description": "Hello World!",
-  "main": "main.js",
-  "author": "Jane Doe",
+  "description": "modeling!",
+  "main": "yankee.js",
+  "author": "ngdream",
+  "homepage": "./",
   "scripts": {
-    "start": "electron ."
+    "startapp": "export ELECTRON_START_URL=http://localhost:3000 && electron .",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   },
   "dependencies": {
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "@mui/material": "^5.11.7",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
     "electron": "^22.1.0",
-    "electron-builder": "^23.6.0"
+    "electron-builder": "^22.10.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "^2.1.3",
+    "web-vitals": "^2.1.4"
   },
-  "devDependencies": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/yankeebuilder/yankee.git"
@@ -20,5 +34,23 @@
   "bugs": {
     "url": "https://github.com/yankeebuilder/yankee/issues"
   },
-  "homepage": "https://github.com/yankeebuilder/yankee#readme"
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ],
+    "homepage": "https://github.com/yankeebuilder/yankee#readme"
+  }
 }

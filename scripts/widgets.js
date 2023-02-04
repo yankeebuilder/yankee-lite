@@ -40,18 +40,18 @@ var relationtypedialog = `
 //     alert(`Key pressed ${name} \r\n Key code value: ${code}`);
 //   }, false);
   
-document.getElementById("donate-button").addEventListener('click', (event) => {
-    dialogs.classList.add("active")
-    dialogs.innerHTML = `
-    <div class=" dialog ">
+// document.getElementById("donate-button").addEventListener('click', (event) => {
+//     dialogs.classList.add("active")
+//     dialogs.innerHTML = `
+//     <div class=" dialog ">
 
-    <a class="donate" href="https://www.paypal.com/donate/?hosted_button_id=2NGECBY5Y635C">donate with paypal</a>
-    <a class="donate" href="" id="mm">donate with mtn or orange (<span class="alert">anavailable for now</span> )</a>
-</div>
+//     <a class="donate" href="https://www.paypal.com/donate/?hosted_button_id=2NGECBY5Y635C">donate with paypal</a>
+//     <a class="donate" href="" id="mm">donate with mtn or orange (<span class="alert">anavailable for now</span> )</a>
+// </div>
     
-    `
+//     `
     
-})
+// })
 toolbuttons.forEach(element => {
     
     element.addEventListener("click", () => {
