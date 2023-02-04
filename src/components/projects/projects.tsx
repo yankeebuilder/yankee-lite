@@ -7,7 +7,6 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 
 
-
 class ProjectToolbar extends React.Component
 {
     render() {
