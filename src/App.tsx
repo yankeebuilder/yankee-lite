@@ -10,9 +10,7 @@ function App() {
   return (
 
     <div className="main"> 
-<header>
-<Menubar />
-      </header>
+
 <Projects />
 <div className="dialog-wrapper"> 
         

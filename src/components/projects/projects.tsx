@@ -1,22 +1,38 @@
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
-g
 
-class ProjectToolbar extends React.Component
+import Canvas from './projectcanvas';
+import entityimg from '../../assets/entity.png'
+import relationimg from '../../assets/relation.png'
+import connectionimg from '../../assets/connection.png'
+import cursorimg from '../../assets/cursor.png'
+import '../../renderer'
+import { onnewdiagram, onopen, onsaved } from '../../renderer';
+import { styled } from '@mui/material';
+const electron = window.require('electron');
+const { ipcMain,ipcRenderer ,dialog,BrowserWindow} = electron;
+
+
+
+interface projecttoolProps {
+  setoption:any ;
+  option: string;
+}
+
+function ProjectToolbar(props:projecttoolProps) 
 {
-    render() {
+ const {setoption,option}=props
+    
         return (
             <div className="toolbar">
             <div className="tools">
-                <button className="active" data-action="move"><img  src="assets/cursor.png" alt=""/> move</button>
-                <button data-action="addentity"> <img src="assets/entity.png" alt=""/> entity</button>
-                <button data-action="addrelation"><img src="assets/relation.png" alt=""/> relation</button>
-                <button data-action="addconnection"> <img src="assets/connection.png" alt=""/>connection</button>
+                <button className={(option == "move")?"active":undefined} onClick={()=>setoption("move")}><img  src={cursorimg} alt=""/> move</button>
+              <button className={(option == "addentity") ? "active" : undefined} onClick={() => setoption("addentity")}> <img src={ entityimg} alt=""/> entity</button>
+                <button className={(option == "addrelation")?"active":undefined} onClick={()=>setoption("addrelation")}><img src={relationimg} alt=""/> relation</button>
+              <button className={(option == "addconnection") ? "active" : undefined} onClick={() => setoption("addconnection")}> <img src={connectionimg} alt=""/>connection</button>
             </div>
     
              <div className="sp">
@@ -32,32 +48,35 @@ class ProjectToolbar extends React.Component
             </div>
         </div>
         )
-    }
+    
     
 }
 
 
 
 
-class Project extends React.Component
+function Project ()
 {
-    render(): React.ReactNode {
+
+  const [option, setoption] = useState("move") 
+  
+    
         return (
             <div className="project">
-                <ProjectToolbar />
+            <ProjectToolbar setoption={setoption} option={option} />
     <div className="model">
-        <canvas width="1200px" height="2000px"></canvas>
-    </div>
+              <Canvas actiontype={option} />
+            </div>
 </div>
         )
     }
-    }
+
 
 
     interface TabPanelProps {
         children?: React.ReactNode;
-        index: number;
-        value: number;
+        index: Number;
+        value: Number;
       }
       
       function TabPanel(props: TabPanelProps) {
@@ -65,6 +84,7 @@ class Project extends React.Component
       
         return (
           <div
+            style={{height:"calc(100% - 48px)"}}
             role="tabpanel"
             hidden={value !== index}
             id={`simple-tabpanel-${index}`}
@@ -72,48 +92,164 @@ class Project extends React.Component
             {...other}
           >
             {value === index && (
-              <Box sx={{ P:0 }}>
-                <Typography>{children}</Typography>
-              </Box>
+          
+                children
+          
             )}
           </div>
         );
       }
+
+
       
       function a11yProps(index: number) {
         return {
-          id: `simple-tab-${index}`,
-          'aria-controls': `simple-tabpanel-${index}`,
+          id: `project-tab-${index}`,
+          'aria-controls': `project-tabpanel-${index}`,
         };
       }
       
-       function Projects() {
-        const [value, setValue] = React.useState(0);
-      
-        const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-          setValue(newValue);
-        };
-      
-        return (
-          <Box sx={{ width: '100%', padding:'0' }}>
-            <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-              <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-                <Tab label="Item One" {...a11yProps(0)} />
-                <Tab label="Item Two" {...a11yProps(1)} />
-                <Tab label="Item Three" {...a11yProps(2)} />
-              </Tabs>
-            </Box>
-            <TabPanel  value={value} index={0}>
-              <Project />
-            </TabPanel>
-            <TabPanel value={value} index={1}>
-            <Project />
-            </TabPanel>
-                <TabPanel value={value} index={2}>
-                <Project />
+      declare global {
+        interface Window { currentdiagram: diagram | undefined; }
 
-            </TabPanel>
-          </Box>
+      }
+    
+interface DMitem
+{
+  entities: Any[];
+  relations: Any[];
+  connections: Any[]
+       }
+
+      interface diagram{
+  id:Number;
+        location: String;
+        items: DMitem
+      }
+       
+var o;
+       function Projects() {
+         const [value, setValue] = React.useState(0);
+         const [diagrams,setdiagrams]=React.useState(Array<diagram>(0))
+         const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+          setValue(newValue);
+
+          window.currentdiagram=diagrams.find(d => d.id === newValue)
+
+         };
+         onnewdiagram(() => {
+           var newdiagram = {
+             location: '',
+             id: (diagrams[diagrams.length - 1]) ? diagrams[diagrams.length - 1].id + 1 : 0,
+             
+             items: {
+               entities: [],
+               relations: [],
+               connections: []
+             }
+           }
+           setdiagrams([...diagrams, newdiagram])
+           setValue(newdiagram.id)
+           window.currentdiagram = newdiagram
+
+
+         })
+
+         
+         
+         interface StyledTabProps {
+           id: string;
+           label: string;
+        }
+        
+        const StyledTab = styled((props: StyledTabProps) => (
+          <Tab disableRipple {...props} />
+        ))(({ theme }) => ({
+          textTransform: 'none',
+          fontWeight: theme.typography.fontWeightRegular,
+          fontSize: theme.typography.pxToRem(15),
+          marginRight: theme.spacing(1),
+          color: 'rgba(255, 255, 255, 0.7)',
+          '&.Mui-selected': {
+            color: 'rgb(100, 95, 250)',
+            backgroundColor:"#000"
+          },
+          '&.Mui-focusVisible': {
+            backgroundColor: 'rgba(100, 95, 228, 0.32)',
+          },
+        }));
+        
+         o=diagrams
+         function upd(args)
+         {
+
+           const newdiagrams = [...o];
+            var  diagram = newdiagrams.find(
+              a => a.id === args[0]
+            )
+           
+           console.log(args)
+          
+           console.log(args[1].filePath)
+           console.log("view",args[0])
+           diagram.location = args[1].filePath;
+           console.log(diagrams)
+          setdiagrams(newdiagrams);
+  
+ 
+         }
+
+
+         onsaved(upd)
+
+         onopen((diagram) =>
+         {
+  
+          diagram.id= (diagrams[diagrams.length - 1]) ? diagrams[diagrams.length - 1].id + 1 : 0
+          const newdiagrams = [...o,diagram];
+           setdiagrams(newdiagrams)
+           window.currentdiagram = diagram
+
+           setValue(diagram.id)
+           console.log([...o, diagram])
+
+
+           
+         })
+
+
+
+
+
+
+         
+
+
+         return (
+          <div className='projects'>
+             <Tabs sx={{ paddingLeft: "150px", height: 48 }} value={value} textColor="secondary" onChange={handleChange} aria-label="projects tabs">
+               
+               {diagrams.map(d => {
+                  console.log(d.id)
+                 let name=(!d.location)?`untiled ${d.id}`:d.location
+                 return (<StyledTab label={name} {...a11yProps(d.id)} />)
+               }
+               )}
+   
+             </Tabs>
+             
+             {diagrams.map(d => {
+                                 console.log(d.id)
+
+
+              
+return (             <TabPanel  value={value} index={d.id}>
+  <Project />
+</TabPanel>)
+             }
+               
+)}
+          </div>
         );
       }
           
